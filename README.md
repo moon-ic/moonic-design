@@ -11,8 +11,8 @@
 - 组件参考：antd
 - 构建工具&打包：vite
 - 项目文档&测试：storybook
-- 代码规范工具链：eslint + prittier +stylelint
-- git 提交规范链：husky + commitlint
+- 代码规范工具链：eslint + prittier + stylelint
+- git 提交规范链：husky + commitlint + lint-staged
 
 ## 食用指南 🤫
 

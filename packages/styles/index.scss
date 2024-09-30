@@ -1,11 +1,11 @@
 // config
-@import 'variables';
+@import './src/variables';
 
 //layout
-@import 'reboot';
+@import './src/normalize';
 
 //mixin
-@import 'mixin';
+@import './src/mixin';
 
 // animation
-@import 'animation';
+@import './src/animation';

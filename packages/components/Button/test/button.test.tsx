@@ -1,72 +1,59 @@
-import { render, fireEvent } from '@testing-library/react';
-import { describe, expect, vi, test } from 'vitest';
 import React from 'react';
-import Button from '../button';
-import { BaseButtonProps } from '../button';
+import { render, fireEvent } from '@testing-library/react';
+import Button, { ButtonProps } from '../button';
+import { describe, expect, it, vitest } from 'vitest';
+import '@testing-library/jest-dom';
 
-// 单击事件、禁用、加载
-describe('test Button', () => {
-	test('button click event', () => {
-		const handleCallback = vi.fn();
-		const { getByRole } = render(
-			<Button onClick={handleCallback}>Click Me</Button>
-		);
-		const element = getByRole('button');
+const defaultProps = {
+	onClick: vitest.fn()
+};
+const testProps: ButtonProps = {
+	btnType: 'primary',
+	size: 'lg',
+	className: 'klass'
+};
+const disabledProps: ButtonProps = {
+	disabled: true,
+	onClick: vitest.fn()
+};
+
+describe('test Button component', () => {
+	it('should render the correct default button', () => {
+		const wrapper = render(<Button {...defaultProps}>Nice</Button>);
+		const element = wrapper.getByText('Nice') as HTMLButtonElement;
+		expect(element).toBeInTheDocument();
+		expect(element.tagName).toEqual('BUTTON');
+		expect(element).toHaveClass('btn btn-default');
+		expect(element.disabled).toBeFalsy();
 		fireEvent.click(element);
-		expect(handleCallback).toHaveBeenCalled();
+		expect(defaultProps.onClick).toHaveBeenCalled();
 	});
 
-	test('disable the button', () => {
-		const handleClick = vi.fn();
-		const { getByRole } = render(
-			<Button onClick={handleClick} disabled>
-				Disabled
+	it('should render the correct component based on different props', () => {
+		const wrapper = render(<Button {...testProps}>Nice</Button>);
+		const element = wrapper.getByText('Nice');
+		expect(element).toBeInTheDocument();
+		expect(element).toHaveClass('btn-primary btn-lg klass');
+	});
+
+	it('should render a link when btnType equals link and href is provided', () => {
+		const wrapper = render(
+			<Button btnType="link" href="http://dummyurl">
+				Link
 			</Button>
 		);
-		const element = getByRole('button');
+		const element = wrapper.getByText('Link');
+		expect(element).toBeInTheDocument();
+		expect(element.tagName).toEqual('A');
+		expect(element).toHaveClass('btn btn-link');
+	});
+
+	it('should render disabled button when disabled set to true', () => {
+		const wrapper = render(<Button {...disabledProps}>Nice</Button>);
+		const element = wrapper.getByText('Nice') as HTMLButtonElement;
+		expect(element).toBeInTheDocument();
+		expect(element.disabled).toBeTruthy();
 		fireEvent.click(element);
-		expect(handleClick).not.toHaveBeenCalled();
-	});
-
-	test('the loading button', () => {
-		const { container } = render(
-			<Button>
-				<i className="wdu-icon-loading"></i>Loading
-			</Button>
-		);
-		const buttonHTML = container.firstChild; // 获取按钮的第一个子元素
-		expect(buttonHTML?.firstChild).toBe('<i class="wdu-icon-loading"></i>');
-	});
-});
-
-// Button 的类型，通过 describe.each() 来简化代码
-const defineTypes = [
-	{ type: 'primary', expected: 'wdu-button-primary' },
-	{ type: 'default', expected: 'wdu-button-default' },
-	{ type: 'danger', expected: 'wdu-button-danger' },
-	{ type: 'link', expected: 'wdu-button-link' }
-];
-describe.each(defineTypes)('test the type of button', ({ type, expected }) => {
-	test(`returns ${expected}`, () => {
-		const { getByRole } = render(
-			<Button btnType={type as BaseButtonProps['btnType']}>Button</Button>
-		);
-		const element = getByRole('button');
-		expect(element.classList.contains(expected)).toBeTruthy();
-	});
-});
-
-// Button 的尺寸
-const defineSize = [
-	{ size: 'sm', expected: 'wdu-button-small' },
-	{ size: 'lg', expected: 'wdu-button-large' }
-];
-describe.each(defineSize)('test the size of button', ({ size, expected }) => {
-	test(`${size} size button`, () => {
-		const { getByRole } = render(
-			<Button size={size as BaseButtonProps['size']}>Button</Button>
-		);
-		const element = getByRole('button');
-		expect(element.classList.contains(expected)).toBeTruthy();
+		expect(disabledProps.onClick).not.toHaveBeenCalled();
 	});
 });

@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
+    "test:button": "vitest run ./packages/components/Menu/test/menu.test.tsx",
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage",
     "build": "vite build",

@@ -4,12 +4,16 @@ import classNames from 'classnames';
 export type ButtonSize = 'lg' | 'sm';
 export type ButtonType = 'primary' | 'default' | 'danger' | 'link';
 interface BaseButtonProps {
-	className?: string;
+	/** 是否禁用 */
 	disabled?: boolean;
+	/** Button尺寸 */
 	size?: ButtonSize;
+	/** Button类型 */
 	btnType?: ButtonType;
-	children: React.ReactNode;
+	className?: string;
+	style?: React.CSSProperties;
 	href?: string;
+	children: React.ReactNode;
 }
 type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>;
 type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>;
@@ -19,26 +23,27 @@ const Button: FC<ButtonProps> = (props) => {
 	const {
 		btnType = 'default',
 		disabled = false,
-		size,
+		size = 'sm',
 		children,
 		href,
 		className,
+		style,
 		...restProps
 	} = props;
 	const cls = classNames('btn', className, {
 		[`btn-${btnType}`]: btnType,
-		[`btn${size}`]: size,
+		[`btn-${size}`]: size,
 		disabled: btnType === 'link' && disabled
 	});
 	if (btnType === 'link' && href) {
 		return (
-			<a className={cls} href={href} {...restProps}>
+			<a className={cls} style={style} href={href} {...restProps}>
 				{children}
 			</a>
 		);
 	} else {
 		return (
-			<button className={cls} disabled={disabled} {...restProps}>
+			<button className={cls} style={style} disabled={disabled} {...restProps}>
 				{children}
 			</button>
 		);

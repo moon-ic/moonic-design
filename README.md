@@ -7,10 +7,11 @@
 - 工程目录选型：monorepo
 - 包管理器：pnpm
 - 框架：react
-- css 预处理语言：less
+- css 预处理语言：sass
 - 组件参考：antd
-- 构建工具&打包：vite
-- 项目文档&测试：storybook
+- 测试：vitest
+- 打包：vite
+- 项目文档：storybook
 - 代码规范工具链：eslint + prittier + stylelint
 - git 提交规范链：husky + commitlint + lint-staged
 

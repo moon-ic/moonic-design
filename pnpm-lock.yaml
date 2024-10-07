@@ -30,6 +30,15 @@ importers:
       '@eslint/js':
         specifier: ^9.11.1
         version: 9.11.1
+      '@fortawesome/fontawesome-svg-core':
+        specifier: ^6.6.0
+        version: 6.6.0
+      '@fortawesome/free-solid-svg-icons':
+        specifier: ^6.6.0
+        version: 6.6.0
+      '@fortawesome/react-fontawesome':
+        specifier: ^0.2.2
+        version: 0.2.2(@fortawesome/fontawesome-svg-core@6.6.0)(react@18.3.1)
       '@storybook/addon-essentials':
         specifier: 8.3.1
         version: 8.3.1(storybook@8.3.1)(webpack-sources@3.2.3)
@@ -615,6 +624,24 @@ packages:
   '@eslint/plugin-kit@0.2.0':
     resolution: {integrity: sha512-vH9PiIMMwvhCx31Af3HiGzsVNULDbyVkHXwlemn/B0TFj/00ho3y55efXrUZTfQipxoHC5u4xq6zblww1zm1Ig==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@fortawesome/fontawesome-common-types@6.6.0':
+    resolution: {integrity: sha512-xyX0X9mc0kyz9plIyryrRbl7ngsA9jz77mCZJsUkLl+ZKs0KWObgaEBoSgQiYWAsSmjz/yjl0F++Got0Mdp4Rw==}
+    engines: {node: '>=6'}
+
+  '@fortawesome/fontawesome-svg-core@6.6.0':
+    resolution: {integrity: sha512-KHwPkCk6oRT4HADE7smhfsKudt9N/9lm6EJ5BVg0tD1yPA5hht837fB87F8pn15D8JfTqQOjhKTktwmLMiD7Kg==}
+    engines: {node: '>=6'}
+
+  '@fortawesome/free-solid-svg-icons@6.6.0':
+    resolution: {integrity: sha512-IYv/2skhEDFc2WGUcqvFJkeK39Q+HyPf5GHUrT/l2pKbtgEIv1al1TKd6qStR5OIwQdN1GZP54ci3y4mroJWjA==}
+    engines: {node: '>=6'}
+
+  '@fortawesome/react-fontawesome@0.2.2':
+    resolution: {integrity: sha512-EnkrprPNqI6SXJl//m29hpaNzOp1bruISWaOiRtkMi/xSvHJlzc2j2JAYS7egxt/EbjSNV/k6Xy0AQI6vB2+1g==}
+    peerDependencies:
+      '@fortawesome/fontawesome-svg-core': ~1 || ~6
+      react: '>=16.3'
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -5644,6 +5671,22 @@ snapshots:
   '@eslint/plugin-kit@0.2.0':
     dependencies:
       levn: 0.4.1
+
+  '@fortawesome/fontawesome-common-types@6.6.0': {}
+
+  '@fortawesome/fontawesome-svg-core@6.6.0':
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.6.0
+
+  '@fortawesome/free-solid-svg-icons@6.6.0':
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.6.0
+
+  '@fortawesome/react-fontawesome@0.2.2(@fortawesome/fontawesome-svg-core@6.6.0)(react@18.3.1)':
+    dependencies:
+      '@fortawesome/fontawesome-svg-core': 6.6.0
+      prop-types: 15.8.1
+      react: 18.3.1
 
   '@humanwhocodes/module-importer@1.0.1': {}
 

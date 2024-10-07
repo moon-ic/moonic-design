@@ -32,7 +32,9 @@ const SubMenu: FC<SubMenuProps> = ({
 		index && context.mode === 'vertical' ? openSubMenus.includes(index) : false;
 	const [menuOpen, setOpen] = useState(isOpened);
 	const cls = classNames('menu-item submenu-item', className, {
-		'is-active': context.index === index
+		'is-active': context.index === index,
+		'is-opened': menuOpen,
+		'is-vertical': context.mode === 'vertical'
 	});
 
 	const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {

@@ -9,6 +9,7 @@ import { beforeEach, describe, expect, it, vitest } from 'vitest';
 import '@testing-library/jest-dom';
 import Menu, { MenuProps } from '../menu';
 import MenuItem from '../menuItem';
+import SubMenu from '../subMenu';
 
 const testProps: MenuProps = {
 	defaultIndex: '0',
@@ -28,19 +29,15 @@ const TestMenu = (props: MenuProps) => {
 				disabled
 			</MenuItem>
 			<MenuItem index="2">third</MenuItem>
-			{/* <SubMenu title='dropdown'>
-                <MenuItem index='01'>
-                    drop1
-                </MenuItem>
-                <MenuItem index='02'>
-                    drop2
-                </MenuItem>
-          </SubMenu> */}
+			<SubMenu title="dropdown">
+				<MenuItem index="01">drop1</MenuItem>
+				<MenuItem index="02">drop2</MenuItem>
+			</SubMenu>
 		</Menu>
 	);
 };
 const createStyleFile = () => {
-	const cssFile = `
+	const cssFile: string = `
     .submenu {
         opacity: 0;
     }
@@ -75,7 +72,7 @@ describe('menu and menuItem test', () => {
 	it('default', () => {
 		expect(menuElement).toBeInTheDocument();
 		expect(menuElement).toHaveClass('test');
-		expect(menuElement.getElementsByTagName('li').length).toEqual(4);
+		expect(menuElement.querySelectorAll(':scope>li').length).toEqual(4);
 		expect(activeElement).toHaveClass('menu-item is-active');
 		expect(disabledElement).toHaveClass('is-disabled');
 	});

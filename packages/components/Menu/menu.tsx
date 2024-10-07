@@ -19,7 +19,7 @@ export interface MenuProps {
 	mode?: MenuMode;
 	/**点击菜单项触发的回掉函数 */
 	onSelect?: handleSelect;
-	/**设置子菜单的默认打开--只在纵向模式下生效 */
+	/**设置子菜单的默认打开 只在纵向模式下生效 */
 	defaultOpenSubMenus?: string[];
 	className?: string;
 	style?: CSSProperties;
@@ -35,18 +35,16 @@ interface IMenuContext {
 }
 export const MenuContext = createContext<IMenuContext>({ index: '0' });
 
-const Menu: FC<MenuProps> = (props) => {
-	const {
-		defaultIndex,
-		mode = 'horizontal',
-		onSelect,
-		defaultOpenSubMenus = [],
-		className,
-		style,
-		children
-	} = props;
+const Menu: FC<MenuProps> = ({
+	defaultIndex = '0',
+	mode = 'horizontal',
+	onSelect,
+	defaultOpenSubMenus = [],
+	className,
+	style,
+	children
+}) => {
 	const [active, setActive] = useState<string>(defaultIndex as string);
-
 	const cls = classNames('menu', className, {
 		'menu-vertical': mode === 'vertical',
 		'menu-horizontal': mode === 'horizontal'
@@ -67,7 +65,7 @@ const Menu: FC<MenuProps> = (props) => {
 			const childElement =
 				child as React.FunctionComponentElement<MenuItemProps>;
 			const { displayName } = childElement.type;
-			if (displayName === 'Menuitem' || displayName === 'SubMenu') {
+			if (displayName === 'MenuItem' || displayName === 'SubMenu') {
 				return React.cloneElement(childElement, {
 					index: index.toString()
 				});

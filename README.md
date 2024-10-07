@@ -31,32 +31,24 @@
 
 - Icon 图标 ✅
 
-- Space 间距 ❌
-
-- Layout 布局 ❌
-
 ### 表单
-
-- Form 表单 ❌
-
-- Upload 拖拽上传 ❌
-
-- Input 输入框 ❌
-
-- Radio 单选框 ❌
 
 - Menu 导航菜单（顶部|侧面）✅
 
-- Tag 标签 ❌
+- Input 输入框 ✅
+
+- Upload 拖拽上传 ❌
+
+- Progress 进度条 ❌
+
+- Form 表单 ❌
 
 ### 交互
+
+- Transition 动画过渡 ✅
+
+- AutoComplete 自动补全输入 ✅
 
 - Dialog 弹框 ❌
 
 - Message 全局提示 ❌
-
-- Progress 进度条 ❌
-
-- Canlender 日历 ❌
-
-- ColorPicker 颜色选择器 ❌

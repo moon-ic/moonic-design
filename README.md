@@ -31,23 +31,23 @@
 
 - Icon 图标 ✅
 
-### 表单
-
 - Menu 导航菜单（顶部|侧面）✅
+
+### 表单
 
 - Input 输入框 ✅
 
-- Upload 拖拽上传 ❌
+- AutoComplete 自动补全输入 ✅
 
-- Progress 进度条 ❌
+- Upload 拖拽上传 ✅
+
+- Progress 进度条 ✅
 
 - Form 表单 ❌
 
 ### 交互
 
 - Transition 动画过渡 ✅
-
-- AutoComplete 自动补全输入 ✅
 
 - Dialog 弹框 ❌
 

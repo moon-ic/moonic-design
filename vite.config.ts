@@ -1,11 +1,18 @@
 /// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
 	build: {
 		// 打包后文件目录
 		outDir: 'dist',
+		lib: {
+			entry: './packages/components/index.tsx',
+			name: 'by-design',
+			fileName: 'by-design',
+			formats: ['es', 'umd', 'cjs']
+		},
 		// 压缩
 		minify: false,
 		rollupOptions: {
@@ -18,15 +25,14 @@ export default defineConfig({
 				},
 				dir: 'dist'
 			}
-		},
-		lib: {
-			entry: './index.ts',
-			name: 'by-design',
-			fileName: 'by-design',
-			formats: ['es', 'umd', 'cjs']
 		}
 	},
-	plugins: [react()],
+	plugins: [
+		react(),
+		dts({
+			tsConfigFilePath: './tsconfig.json'
+		})
+	],
 	test: {
 		globals: true,
 		environment: 'jsdom',

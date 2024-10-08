@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "esnext",
+    "target": "es2022",
+    "declaration": true, //自动生成.d.ts声明文件
+    "declarationDir": "dist", // 声明文件生成的目录
+    "jsx": "react",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true //跳过外部模块检查
+  },
+  "include": [
+    "packages"
+  ],
+  "exclude": [
+    "packages/**/*.test.tsx",
+    "packages/**/*.stories.tsx",
+  ]
+}

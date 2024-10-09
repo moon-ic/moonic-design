@@ -1,13 +1,26 @@
 {
-  "name": "by-design",
-  "private": "true",
+  "name": "moonic-design",
+  "version": "0.0.9",
+  "description": "基于react的组件库",
   "type": "module",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/moon-ic/By-design"
+  },
   "scripts": {
     "test": "vitest",
-    "test:button": "vitest run ./packages/components/Upload/test/upload.test.tsx",
     "coverage": "vitest run --coverage",
-    "build": "vite build",
-    "lint": "eslint --fix --quiet ./packages"
+    "clean": "rimraf ./dist",
+    "build": "pnpm clean && pnpm build:ts && pnpm build:css",
+    "build:ts": "tsc -p tsconfig.build.json",
+    "build:css": "sass ./src/styles/index.scss ./dist/index.css",
+    "build:storybook": "build-storybook -s public",
+    "lint": "eslint --fix --quiet ./packages",
+    "storybook": "storybook dev -p 6006"
   },
   "lint-staged": {
     "*.(js|jsx|ts|tsx)": [
@@ -24,6 +37,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@storybook/addon-actions": "^8.3.5",
+    "@storybook/addon-docs": "^8.3.5",
     "@storybook/addon-essentials": "8.3.1",
     "@storybook/addon-interactions": "8.3.1",
     "@storybook/addon-links": "8.3.1",
@@ -73,6 +87,6 @@
     "react-dom": "^18.3.1"
   },
   "keywords": [],
-  "author": "",
+  "author": "moon-ic",
   "license": "ISC"
 }

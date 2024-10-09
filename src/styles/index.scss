@@ -1,0 +1,33 @@
+// config
+@import './src/variables';
+
+// layout
+@import './src/normalize';
+
+// mixin
+@import './src/mixin';
+
+// animation
+@import './src/animation';
+
+// 组件
+// button
+@import '../components/Button/styles/style';
+
+// menu
+@import '../components/Menu/styles/style';
+
+// icon
+@import '../components/Icon/styles/style';
+
+// input
+@import '../components/Input/styles/style';
+
+// auto-complete
+@import '../components/AutoComplete/styles/style';
+
+// upload
+@import '../components/Upload/styles/style';
+
+// progress
+@import '../components/Progress/styles/style';

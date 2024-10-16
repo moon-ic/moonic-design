@@ -10,9 +10,12 @@ import React, {
 import { MenuContext } from './menu';
 import classNames from 'classnames';
 import { MenuItemProps } from './menuItem';
+import Icon from '../Icon';
+import Transition from '../Transition/index';
 
 export interface SubMenuProps {
 	index?: string;
+	/** 标题 */
 	title: string;
 	className?: string;
 	style?: CSSProperties;
@@ -85,13 +88,18 @@ const SubMenu: FC<SubMenuProps> = ({
 				);
 			}
 		});
-		return <ul className={subMenuCls}>{childrenComponent}</ul>;
+		return (
+			<Transition in={menuOpen} timeout={300} animation="zoom-in-top">
+				<ul className={subMenuCls}>{childrenComponent}</ul>
+			</Transition>
+		);
 	};
 
 	return (
 		<li key={index} className={cls} style={style} {...hoverEvents}>
 			<div className="submenu-title" {...clickEvents}>
 				{title}
+				<Icon icon="angle-down" className="arrow-icon" />
 			</div>
 			{renderChildren()}
 		</li>

@@ -45,6 +45,7 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [highLightIndex, setHighLigntIndex] = useState<number>(-1);
 	const debounceValue = useDebounce(inputValue, 500);
+	/** 控制区别handlechange hanldselect，本身不需要引起重新渲染 */
 	const triggerSearch = useRef<boolean>(false);
 	const componentRef = useRef<HTMLDivElement>(null);
 
@@ -52,7 +53,7 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
 		setSuggestions([]);
 	});
 	useEffect(() => {
-		if (debounceValue && triggerSearch) {
+		if (debounceValue && triggerSearch.current) {
 			setSuggestions([]);
 			const res = fetchSuggestions(debounceValue as string);
 			if (res instanceof Promise) {

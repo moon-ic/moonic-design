@@ -5,23 +5,27 @@ import React, {
 	useContext,
 	ReactElement,
 	useEffect,
-	PropsWithChildren,
 	ChangeEvent
 } from 'react';
 import classNames from 'classnames';
-import Schema, { Rules } from 'async-validator';
+import Schema from 'async-validator';
 import { FormContext } from './form';
 
 export interface ItemProps {
+	/**标签 */
+	label?: ReactNode;
+	/**名字，唯一标识  */
+	name?: string;
+	/**子组件属性名 */
+	valuePropName?: string;
+	/**校验规则数组 */
+	rules?: Array<Record<string, any>>;
 	className?: string;
 	style?: CSSProperties;
-	label?: ReactNode;
-	name?: string;
-	valuePropName?: string;
-	rules?: Array<Record<string, any>>;
 	children?: ReactElement;
 }
 
+/** 从事件对象，提取表单控件值 */
 const getValueFromEvent = (e: ChangeEvent<HTMLInputElement>) => {
 	const { target } = e;
 	if (target.type === 'checkbox') {
@@ -29,29 +33,21 @@ const getValueFromEvent = (e: ChangeEvent<HTMLInputElement>) => {
 	} else if (target.type === 'radio') {
 		return target.value;
 	}
-
 	return target.value;
 };
 
 const Item = (props: ItemProps) => {
 	const { className, label, children, style, name, valuePropName, rules } =
 		props;
-
 	if (!name) {
 		return children;
 	}
-
 	const [value, setValue] = useState<string | number | boolean>();
 	const [error, setError] = useState('');
+	const { onValueChange, storeValues, validateRegister } =
+		useContext(FormContext);
 
-	const { onValueChange, values, validateRegister } = useContext(FormContext);
-
-	useEffect(() => {
-		if (value !== values?.[name]) {
-			setValue(values?.[name]);
-		}
-	}, [values, values?.[name]]);
-
+	/**校验函数 */
 	const handleValidate = (value: any) => {
 		let errorMsg = null;
 		if (Array.isArray(rules) && rules.length) {
@@ -63,7 +59,6 @@ const Item = (props: ItemProps) => {
 					};
 				})
 			});
-
 			validator.validate({ [name]: value }, (errors) => {
 				if (errors) {
 					if (errors?.length) {
@@ -76,13 +71,8 @@ const Item = (props: ItemProps) => {
 				}
 			});
 		}
-
 		return errorMsg;
 	};
-
-	useEffect(() => {
-		validateRegister?.(name, () => handleValidate(value));
-	}, [value]);
 
 	const propsName: Record<string, any> = {};
 	if (valuePropName) {
@@ -90,7 +80,6 @@ const Item = (props: ItemProps) => {
 	} else {
 		propsName.value = value;
 	}
-
 	const childEle =
 		React.Children.toArray(children).length > 1
 			? children
@@ -105,7 +94,16 @@ const Item = (props: ItemProps) => {
 					}
 				});
 
-	const cls = classNames('ant-form-item', className);
+	const cls = classNames('form-item', className);
+
+	useEffect(() => {
+		if (value !== storeValues?.[name]) {
+			setValue(storeValues?.[name]);
+		}
+	}, [storeValues, storeValues?.[name]]);
+	useEffect(() => {
+		validateRegister?.(name, () => handleValidate(value));
+	}, [value]);
 
 	return (
 		<div className={cls} style={style}>

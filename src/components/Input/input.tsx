@@ -42,11 +42,21 @@ const Input: FC<InputProps> = (props) => {
 		'input-group-append': !!append,
 		'input-group-prepend': !!prepend
 	});
+	const fixControlledValue = (value: any) => {
+		if (typeof value === 'undefined' || value === null) {
+			return '';
+		}
+		return value;
+	};
+	if ('value' in props) {
+		delete restProps.defaultValue;
+		restProps.value = fixControlledValue(props.value);
+	}
 	return (
 		<div className={cls} style={style}>
 			{prepend && <div className="input-group-prepend">{prepend}</div>}
 			{icon && (
-				<div>
+				<div className="icon-wrapper">
 					<Icon icon={icon} title={`title-${icon}`} />
 				</div>
 			)}

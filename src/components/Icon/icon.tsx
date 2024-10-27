@@ -15,7 +15,7 @@ export type ThemeProps =
 	| 'dark';
 
 export interface IconProps extends FontAwesomeIconProps {
-	// 支持框架主题：不同颜色
+	/**支持框架主题：不同颜色*/
 	theme?: ThemeProps;
 }
 

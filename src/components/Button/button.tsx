@@ -21,8 +21,11 @@ export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
 
 const Button: FC<ButtonProps> = (props) => {
 	const {
+		/** 类型 */
 		btnType = 'default',
+		/** 可见 */
 		disabled = false,
+		/** 大小 */
 		size = 'sm',
 		children,
 		href,

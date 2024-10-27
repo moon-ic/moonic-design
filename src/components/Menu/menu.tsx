@@ -10,7 +10,6 @@ import { MenuItemProps } from './menuItem';
 
 /** 点击子菜单触发的回调 */
 type handleSelect = (selectIndex: string) => void;
-
 type MenuMode = 'horizontal' | 'vertical';
 export interface MenuProps {
 	/**菜单类型 横向或者纵向 */

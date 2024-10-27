@@ -3,15 +3,24 @@ import axios from 'axios';
 import UploadList from './uploadList';
 import Dragger from './dragger';
 
+/** 文件状态 */
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error';
 export interface UploadFile {
+	/** id  */
 	uid: string;
+	/** 大小 */
 	size: number;
+	/** 名字 */
 	name: string;
+	/** 文件状态 */
 	status?: UploadFileStatus;
+	/** 上传进度 */
 	percent?: number;
+	/** 原始文件 */
 	raw?: File;
+	/** 上传成功信息 */
 	response?: any;
+	/** 上传失败信息 */
 	error?: any;
 }
 
@@ -68,14 +77,18 @@ const Upload: FC<UploadProps> = (props) => {
 		children,
 		drag
 	} = props;
+	/**上传文件input */
 	const fileInput = useRef<HTMLInputElement>(null);
+	/** 上传列表*/
 	const [fileList, setFileList] = useState<UploadFile[]>([]);
 
+	/** children点击事件函数*/
 	const handleClick = () => {
 		if (fileInput.current) {
 			fileInput.current.click();
 		}
 	};
+	/** 上传文件函数*/
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
 		if (!files) return;
@@ -84,6 +97,7 @@ const Upload: FC<UploadProps> = (props) => {
 			fileInput.current.value = '';
 		}
 	};
+	/** 列表移除文件*/
 	const handleRemove = (file: UploadFile) => {
 		setFileList((prevList) => {
 			return prevList.filter((item) => item.uid !== file.uid);
@@ -92,7 +106,7 @@ const Upload: FC<UploadProps> = (props) => {
 			onRemove(file);
 		}
 	};
-
+	/** 更新文件列表(返回新的而不是修改原来的) */
 	const updateFileList = (
 		updateFile: UploadFile,
 		updateObj: Partial<UploadFile>
@@ -107,6 +121,7 @@ const Upload: FC<UploadProps> = (props) => {
 			});
 		});
 	};
+	/** 上传文件 */
 	const uploadFiles = (files: FileList) => {
 		let postFiles = Array.from(files);
 		postFiles.forEach((file) => {
@@ -124,6 +139,7 @@ const Upload: FC<UploadProps> = (props) => {
 			}
 		});
 	};
+	/** 网络上传文件 axios格式封装*/
 	const post = (file: File) => {
 		let _file: UploadFile = {
 			uid: Date.now() + 'upload-file',

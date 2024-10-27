@@ -11,9 +11,9 @@ import React, {
 
 export interface FormContextProps {
 	/**store值 */
-	values?: Record<string, any>;
+	storeValues?: Record<string, any>;
 	/**修改value */
-	setValues?: (values: Record<string, any>) => void;
+	setStoreValues?: (storeValues: Record<string, any>) => void;
 	/**监听value变化函数 */
 	onValueChange?: (key: string, value: any) => void;
 	/**注册表单项校验规则 */
@@ -81,8 +81,8 @@ const Form: FC<FormProps> = (props) => {
 		<FormContext.Provider
 			value={{
 				onValueChange,
-				values,
-				setValues: (v) => setValues(v),
+				storeValues: values,
+				setStoreValues: (v) => setValues(v),
 				validateRegister: handleValidateRegister
 			}}
 		>

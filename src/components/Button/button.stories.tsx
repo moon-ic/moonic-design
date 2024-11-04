@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
+import '../../../dist/index.css';
 import Button from './index';
 import React from 'react';
 

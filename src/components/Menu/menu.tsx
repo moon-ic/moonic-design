@@ -13,9 +13,9 @@ type handleSelect = (selectIndex: string) => void;
 type MenuMode = 'horizontal' | 'vertical';
 export interface MenuProps {
 	/**菜单类型 横向或者纵向 */
-	defaultIndex?: string;
-	/**默认 active 的菜单项的索引值 */
 	mode?: MenuMode;
+	/**默认 active 的菜单项的索引值 */
+	defaultIndex?: string;
 	/**点击菜单项触发的回掉函数 */
 	onSelect?: handleSelect;
 	/**设置子菜单的默认打开 只在纵向模式下生效 */
